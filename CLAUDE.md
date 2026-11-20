@@ -15,7 +15,7 @@ To preview, open `index.html` in a browser (e.g. `open index.html`) or serve the
 - **Markup** (`<main id="basla">`): hero with a live savings calculator, then sections linked from the nav by id — `#hizmetler`, `#surec`, `#senaryolar`, `#hakkimizda` (founder photo `kurucu.jpg`, kept next to index.html), `#paketler`, `#sss`, `#iletisim` (contact form). Sections use `aria-labelledby` pointing at their `<h2>`.
 - **JS** (single IIFE at the bottom):
   - Savings calculator: reads range inputs `#hours`, `#cost`, `#rate`; computes monthly hours as `hours × 4.33 × rate`, then monthly/yearly ₺ savings; formats with `Intl.NumberFormat('tr-TR')` into `#r-hours`, `#r-month`, `#r-year`.
-  - Contact form (`#contact-form`): client-side validation only. It is **not connected to any submission backend** — the submit handler just shows a message in `#form-note`. Wiring it to a form service/server is a known TODO noted in the code.
+  - Contact form (`#contact-form`): validates name/email client-side, then POSTs `FormData` via `fetch` to the Formspree endpoint in the form's `action` attribute (`https://formspree.io/f/<id>`), with a `_gotcha` honeypot and `_subject` hidden field. While `action` still contains the placeholder `FORM_ID`, submit shows a "not configured" message instead of sending. Status/errors go to `#form-note` (`.is-error` for errors).
 
 ## Conventions
 
